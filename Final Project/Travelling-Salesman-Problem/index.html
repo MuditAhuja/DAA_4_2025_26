@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TSP Visualizer</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Controls -->
+        <aside class="sidebar">
+            <header class="header">
+                <h1>TSP Visualizer</h1>
+                <p>Interactive Traveling Salesman Problem</p>
+            </header>
+
+            <div class="control-group">
+                <label>Algorithm</label>
+                <select id="algo-select" class="styled-select">
+                    <option value="nearest-neighbor">Nearest Neighbor (Greedy)</option>
+                    <option value="two-opt">2-Opt Heuristic</option>
+                    <option value="simulated-annealing">Simulated Annealing</option>
+                    <option value="brute-force">Brute Force (Small dataset)</option>
+                </select>
+            </div>
+
+            <div class="control-group">
+                <label>City Controls</label>
+                <div class="inline-controls">
+                    <input type="number" id="random-count" value="30" min="3" max="200" class="styled-input">
+                    <button id="btn-generate" class="btn secondary">Generate Random</button>
+                </div>
+                <div class="inline-controls">
+                    <button id="btn-clear" class="btn outline">Clear All Cities</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label>Simulation Controls</label>
+                <div class="inline-controls">
+                    <button id="btn-start" class="btn primary">Start</button>
+                    <button id="btn-pause" class="btn secondary" disabled>Pause</button>
+                    <button id="btn-reset" class="btn outline" disabled>Reset</button>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label for="speed-slider">Animation Speed</label>
+                <input type="range" id="speed-slider" min="1" max="100" value="50">
+            </div>
+
+            <div class="control-group">
+                <label class="toggle-container">
+                    <input type="checkbox" id="toggle-animation" checked>
+                    <span class="checkmark"></span>
+                    Show Animation
+                </label>
+            </div>
+
+            <div class="control-group stats-panel">
+                <h3>Statistics</h3>
+                <div class="stat-row">
+                    <span>Best Distance:</span>
+                    <span id="stat-best-distance" class="stat-value highlight">0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span>Current Distance:</span>
+                    <span id="stat-current-distance" class="stat-value">0.00</span>
+                </div>
+                <div class="stat-row">
+                    <span>Iterations:</span>
+                    <span id="stat-iterations" class="stat-value">0</span>
+                </div>
+                <div class="stat-row">
+                    <span>Time Taken:</span>
+                    <span id="stat-time" class="stat-value">0 ms</span>
+                </div>
+            </div>
+
+            <div class="instructions">
+                <strong>How to use:</strong><br>
+                - Click to add a city.<br>
+                - Drag to move a city.<br>
+                - Right-click to delete a city.
+            </div>
+            
+            <div class="io-controls">
+                <button id="btn-export" class="btn small outline">Export JSON</button>
+                <input type="file" id="file-import" accept=".json" style="display: none;">
+                <button id="btn-import" class="btn small outline">Import JSON</button>
+            </div>
+        </aside>
+
+        <!-- Main Visualization Area -->
+        <main class="main-content">
+            <canvas id="tsp-canvas"></canvas>
+            
+            <!-- Optional Convergence Graph overlay -->
+            <div class="graph-container">
+                <canvas id="graph-canvas"></canvas>
+            </div>
+        </main>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
